@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": [
+        "ExpertSystem\\src"
+    ],
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "CLIPSJNI\\CLIPSJNI.jar"
+    ]
+}

@@ -1,5 +1,6 @@
 package net.sf.clipsrules.jni;
 
+import java.nio.file.Paths;
 import java.io.InputStream;
 
 public class Environment
@@ -21,7 +22,7 @@ public class Environment
    public static final String MESSAGES = "messages";
    public static final String MESSAGE_HANDLERS = "message-handlers";
 
-   static { System.loadLibrary("CLIPSJNI"); }
+   static { System.load(Paths.get(System.getProperty("user.dir"), "ExpertSystem", "lib", "CLIPSJNI.dll").toString()); }
 
    private long theEnvironment;
 
