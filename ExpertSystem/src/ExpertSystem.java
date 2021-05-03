@@ -10,32 +10,58 @@ public class ExpertSystem {
         this.clips = new Environment();
     }
 
-    public double getNoteFrequency(String Note, Integer k) {
-        // Clear environment
-        this.clips.clear();
-
-        // Load facts, functions, rules, and templates
-        this.clips.load(Constants.FACTS);
-        this.clips.load(Constants.FUNCTIONS);
-        this.clips.load(Constants.TEMPLATES);
-        this.clips.load(Constants.RULES);
-
-        // Load in the environment
-        this.clips.reset();
-
+    private String evalExpression(String expression, String response, String field) {
         // Set the new fact
-        this.clips.assertString("(requested-note " + Note + " " + k + ")");
-        this.clips.run();;
+        this.clips.assertString(expression);
+        this.clips.run();
 
-        MultifieldValue mv = (MultifieldValue) clips.eval("(find-all-facts ((?f response-frequency)) TRUE)");
+        MultifieldValue mv = (MultifieldValue) clips.eval("(find-all-facts ((?f " + response +")) TRUE)");
         FactAddressValue fact = (FactAddressValue) mv.multifieldValue().get(0);
 
         try {
-            return Float.parseFloat(fact.getFactSlot("frequency").toString());
+            return fact.getFactSlot("frequency").toString();
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        return 0.0;
+        return "";
+    }
+
+    /**
+     * Returns the frequency of a given note
+     * 
+     * Example:
+     *      -getNoteFrequency("A", 0) -> 27.5
+     * 
+     * @param String note
+     * @param Integer scale
+     * 
+     * @return frequency of the note
+     */
+    public double getNoteFrequency(String note, Integer k) {
+        // Load the environment
+        this.loadEnv();
+
+        // Load problem rule
+        this.clips.load(Constants.RULE_NOTE_FREQUENCY);
+
+        // Load in the environment
+        this.clips.reset();
+
+        // Evaluate the expression and get the result
+        String expression = "(requested-note " + note + " " + k + ")";
+        String result = this.evalExpression(expression, "response-frequency", "frequency");
+
+        return Float.parseFloat(result);
+    }
+
+    private void loadEnv() {
+        // Clear environment
+        this.clips.clear();
+
+        // Load facts, functions, rule, and templates
+        this.clips.load(Constants.FACTS);
+        this.clips.load(Constants.FUNCTIONS);
+        this.clips.load(Constants.TEMPLATES);
     }
 }
