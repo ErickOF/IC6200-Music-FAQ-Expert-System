@@ -1,6 +1,6 @@
 public class App {
     public static void main(String[] args) throws Exception {
-        new ExpertSystem();
-        System.out.println("Hello, World!");
+        ExpertSystem expertSystem = new ExpertSystem();
+        System.out.println(expertSystem.getNoteFrequency("A", 0));
     }
 }

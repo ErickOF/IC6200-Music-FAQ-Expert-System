@@ -1,0 +1,1 @@
+(deftemplate response-frequency (slot frequency))
