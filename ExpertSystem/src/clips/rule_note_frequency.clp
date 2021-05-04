@@ -1,4 +1,4 @@
-(defrule get-note-frequency "Print note frequency base on the note"
+(defrule get-note-frequency "Returns note frequency base on the note"
     ; Check the name of the requested note and store the scale
     (requested-note C|C#|Db|D|D#|Eb|E|Fb|F|F#|Gb|G|G#|Ab|A|A#|Bb|B ?rscale)
     ; Check the scale of the requested note and store the name
