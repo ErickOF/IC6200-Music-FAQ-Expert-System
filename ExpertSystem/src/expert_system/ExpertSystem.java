@@ -1,3 +1,5 @@
+package expert_system;
+
 import net.sf.clipsrules.jni.Environment;
 import net.sf.clipsrules.jni.FactAddressValue;
 import net.sf.clipsrules.jni.MultifieldValue;
@@ -14,8 +16,8 @@ public class ExpertSystem {
      * Function to eval an expression in CLIPS
      *
      * @param expression - expression to evaluate in CLIPS
-     * @param response - name of the structure
-     * @param field - field where the response where stored
+     * @param response   - name of the structure
+     * @param field      - field where the response where stored
      * 
      * @return evaluation of the expression in CLIPS
      */
@@ -24,7 +26,7 @@ public class ExpertSystem {
         this.clips.assertString(expression);
         this.clips.run();
 
-        MultifieldValue mv = (MultifieldValue) clips.eval("(find-all-facts ((?f " + response +")) TRUE)");
+        MultifieldValue mv = (MultifieldValue) clips.eval("(find-all-facts ((?f " + response + ")) TRUE)");
         FactAddressValue fact = (FactAddressValue) mv.multifieldValue().get(0);
 
         try {
@@ -36,7 +38,39 @@ public class ExpertSystem {
         return "";
     }
 
-    
+    /**
+     * Function to eval an expression in CLIPS
+     *
+     * @param expression - expression to evaluate in CLIPS
+     * @param response   - name of the structure
+     * @param field      - field where the response where stored
+     * 
+     * @return evaluation of the expression in CLIPS
+     */
+    private String[] evalExpression(String expression, String response, String[] fields) {
+        // Set the new fact
+        this.clips.assertString(expression);
+        this.clips.run();
+
+        MultifieldValue mv = (MultifieldValue) clips.eval("(find-all-facts ((?f " + response + ")) TRUE)");
+        FactAddressValue fact = (FactAddressValue) mv.multifieldValue().get(0);
+
+        final int size = fields.length;
+        String[] result = new String[size];
+
+        try {
+            for (int i = 0; i < size; i++) {
+                result[i] = fact.getFactSlot(fields[i]).toString();
+            }
+
+            return result;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return result;
+    }
+
     /**
      * Returns the distance between an interval
      * 
@@ -61,6 +95,36 @@ public class ExpertSystem {
         // Evaluate the expression and get the result
         String expression = "(requested-interval " + note1 + " " + note2 + ")";
         String result = this.evalExpression(expression, "response-distance", "distance");
+
+        return result;
+    }
+
+    /**
+     * Returns the major scale base on a note
+     * 
+     * Example:
+     *      -getMajorScale("C") -> "C D E F G A B"
+     * 
+     * @param note - note to build musical scale
+     * 
+     * @return major scale base on a note
+     */
+    public String[] getMajorScale(String note) {
+        // Load the environment
+        this.loadEnv();
+
+        // Load problem rule
+        this.clips.load(Constants.RULE_MAJOR_SCALE);
+
+        // Load in the environment
+        this.clips.reset();
+
+        // Evaluate the expression and get the result
+        String expression = "(requested-note " + note + " " + ")";
+        //String[] fields = { "i", "ii", "iii", "iv", "v", "vi", "vii", "viii" };
+        String[] fields = { "i", "ii", "iii", "iv", "v", "vi", "vii" };
+
+        String[] result = this.evalExpression(expression, "response-scale", fields);
 
         return result;
     }
@@ -93,6 +157,9 @@ public class ExpertSystem {
         return Float.parseFloat(result);
     }
 
+    /**
+     * Load CLIPS environment
+     */
     private void loadEnv() {
         // Clear environment
         this.clips.clear();

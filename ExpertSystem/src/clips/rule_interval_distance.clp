@@ -8,7 +8,7 @@
     (note ?rname2 ?number2)
     ; Get the interval
     (interval ?inumber ?iname)
-    (test (eq (abs (- ?number2 ?number1)) ?inumber))
+    (test (eq (- ?number2 ?number1) ?inumber))
     =>
     ; Deducting interval
     (assert (response-distance (distance ?iname)))

@@ -4,3 +4,13 @@
 (deftemplate response-distance "Response of deduct distance of a given interval"
     (slot distance)
 )
+(deftemplate response-scale "Response of deduct scale base on a given scale"
+    (slot i)
+    (slot ii)
+    (slot iii)
+    (slot iv)
+    (slot v)
+    (slot vi)
+    (slot vii)
+    ;(slot viii)
+)
