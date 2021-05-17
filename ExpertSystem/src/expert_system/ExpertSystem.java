@@ -70,6 +70,34 @@ public class ExpertSystem {
 
         return result;
     }
+    /**
+     * Returns the guitar circle of a given note
+     * 
+     * Example:
+     *      -getGuitarCircle("C") -> "A D G C"
+     * 
+     * @param note - note to build guitar circle
+     * 
+     * @return guitar circle of a given note
+     */
+    public String[] getGuitarCircle(String note) {
+        // Load the environment
+        this.loadEnv();
+
+        // Load problem rule
+        this.clips.load(Constants.RULE_GUITAR_CIRCLE);
+
+        // Load in the environment
+        this.clips.reset();
+
+        // Evaluate the expression and get the result
+        String expression = "(requested-note " + note + " " + ")";
+        String[] fields = { "vi", "ii", "V", "I" };
+
+        String[] result = this.evalExpression(expression, "response-guitar-circle", fields);
+
+        return result;
+    }
 
     /**
      * Returns the distance between an interval

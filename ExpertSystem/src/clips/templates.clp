@@ -14,3 +14,9 @@
     (slot vii)
     ;(slot viii)
 )
+(deftemplate response-guitar-circle "Response of deduct guitar circle"
+    (slot vi)
+    (slot ii)
+    (slot V)
+    (slot I)
+)
