@@ -1,5 +1,6 @@
 import test.FrequencyTest;
 import test.IntervalTest;
+import test.MajorScaleTest;
 
 public class JTesting {
     public static void main(String[] args) {
@@ -10,5 +11,8 @@ public class JTesting {
         intervalTest.testIntervalC();
         intervalTest.testIntervalD();
         intervalTest.testIntervalE();
+
+        MajorScaleTest majorScaleTest = new MajorScaleTest();
+        majorScaleTest.testMajorScale();
     }
 }
