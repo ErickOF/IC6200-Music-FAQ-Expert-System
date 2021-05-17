@@ -17,7 +17,6 @@
     (note A# 1)
     (note Bb 1)
     (note B 2)
-    (scale-interval 11 septima-mayor)
     (interval -11 segunda-menor)
     (interval -10 segunda-mayor)
     (interval -9 tercera-menor)
