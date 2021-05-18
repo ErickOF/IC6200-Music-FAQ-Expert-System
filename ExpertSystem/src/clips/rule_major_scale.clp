@@ -14,8 +14,8 @@
     (test (or (eq (- ?num3 ?num1) 4) (eq (- ?num3 ?num1) -8)))
     (test (or (eq (- ?num4 ?num1) 5) (eq (- ?num4 ?num1) -7)))
     (test (or (eq (- ?num5 ?num1) 7) (eq (- ?num5 ?num1) -5)))
-    (test (or (eq (- ?num6 ?num1) 5) (eq (- ?num6 ?num1) -3)))
-    (test (or (eq (- ?num7 ?num1) 3) (eq (- ?num7 ?num1) -1)))
+    (test (or (eq (- ?num6 ?num1) 9) (eq (- ?num6 ?num1) -3)))
+    (test (or (eq (- ?num7 ?num1) 11) (eq (- ?num7 ?num1) -1)))
     =>
     ;(printout t ?base ?note2 ?note3 ?note4 ?note5 ?note6 ?note7 crlf)
     ;(printout t ?base ?note2 ?note3 ?note4 ?note5 ?note6 ?note7 ?note8 crlf)

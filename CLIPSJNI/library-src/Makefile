@@ -2,7 +2,7 @@
 # Notes:
 #    -fPIC option needed for 64-bit systems
 
-JAVA_HOME = /usr/lib/jvm/java-8-oracle
+JAVA_HOME = /usr/lib/jvm/java-1.11.0-openjdk-amd64
 JAVA_INCLUDE = $(JAVA_HOME)/include
 JAVA_INCLUDE_OS = $(JAVA_INCLUDE)/linux
 
