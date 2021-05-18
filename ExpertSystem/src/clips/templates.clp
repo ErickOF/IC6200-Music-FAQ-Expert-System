@@ -20,3 +20,10 @@
     (slot V)
     (slot I)
 )
+(deftemplate response-note-upper "Response of deduct the note with a distance of a given interval"
+    (slot note)
+)
+
+(deftemplate response-note-lower "Response of deduct the note with a distance of a given interval"
+    (slot note)
+)

@@ -100,6 +100,43 @@ public class ExpertSystem {
     }
 
     /**
+     * Returns the note with a distance of a given interval
+     * 
+     * Example:
+     *      -getInterval2Note("C", "quinta", "1") -> "G"
+     *      -getInterval2Note("C", "quinta", "0") -> "F"
+     * 
+     * @param note - base note
+     * @param interval - requested interval
+     * @param direction - 1 to upper, otherwise to lower
+     * 
+     * @return note with a distance of a given interval
+     */
+    public String getInterval2Note(String note, String interval, String direction) {
+        // Load the environment
+        this.loadEnv();
+
+        // Load problem rule
+        this.clips.load(Constants.RULE_INTERVAL2NOTE);
+
+        // Load in the environment
+        this.clips.reset();
+
+        // Evaluate the expression and get the result
+        String expression = "(requested-interval " + note + " " + interval + ")";
+
+        String dir = "lower";
+
+        if (direction.equals("1")) {
+            dir = "upper";
+        }
+
+        String result = this.evalExpression(expression, "response-note-" + dir, "note");
+
+        return result;
+    }
+
+    /**
      * Returns the distance between an interval
      * 
      * Example:

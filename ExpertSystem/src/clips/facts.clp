@@ -38,5 +38,5 @@
     (interval 9 sexta-mayor)
     (interval 10 septima-menor)
     (interval 11 septima-mayor)
-    (interval 12 octave)
+    (interval 12 octava)
 )

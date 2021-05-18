@@ -15,9 +15,10 @@ public class App {
 
             System.out.println("1. Calcular la frecuencia de una nota.");
             System.out.println("2. Obtener la distance entre dos notas.");
-            System.out.println("3. Obtener la escala mayor dada una nota.");
-            System.out.println("4. Obtener el circulo de acordes dada una nota.");
-            System.out.println("5. Salir.\n");
+            System.out.println("3. Obtener la nota a una distancia de un intervalo dado.");
+            System.out.println("4. Obtener la escala mayor dada una nota.");
+            System.out.println("5. Obtener el circulo de acordes dada una nota.");
+            System.out.println("6. Salir.\n");
 
             System.out.print("Opción: ");
             String option = input.nextLine();
@@ -94,6 +95,93 @@ public class App {
                 boolean asking = true;
 
                 while (asking) {
+                    System.out.println("Ingrese la nota para cual desea obtener la nota a un intervalo dado.");
+                    System.out.print("Nota (S para salir)): ");
+                    String requestedNote = input.nextLine();
+
+                    if (requestedNote.equalsIgnoreCase("S")) {
+                        asking = false;
+                        System.out.println("\n");
+                    } else if (requestedNote.matches("(C|D|E|F|G|A|B)(#|b)")
+                            || requestedNote.matches("(C|D|E|F|G|A|B)")) {
+
+                        while (asking) {
+                            System.out.println("\nSeleccione la distancia de la nota que desea obtener:");
+                            System.out.println("1. segunda-menor");
+                            System.out.println("2. segunda-mayor");
+                            System.out.println("3. tercera-menor");
+                            System.out.println("4. tercera-mayor");
+                            System.out.println("5. cuarta");
+                            System.out.println("6. quinta");
+                            System.out.println("7. sexta-menor");
+                            System.out.println("8. sexta-mayor");
+                            System.out.println("9. septima-menor");
+                            System.out.println("10. septima-mayor");
+                            System.out.println("11. Salir");
+                            System.out.print("Intervalo: ");
+                            String interval = input.nextLine();
+
+                            if ("1 2 3 4 5 6 7 8 9 10".contains(interval)) {
+                                if (interval.equals("1")) {
+                                    interval = "segunda-menor";
+                                } else if (interval.equals("2")) {
+                                    interval = "segunda-mayor";
+                                } else if (interval.equals("3")) {
+                                    interval = "tercera-menor";
+                                } else if (interval.equals("4")) {
+                                    interval = "tercera-mayor";
+                                } else if (interval.equals("5")) {
+                                    interval = "cuarta";
+                                } else if (interval.equals("6")) {
+                                    interval = "quinta";
+                                } else if (interval.equals("7")) {
+                                    interval = "sexta-menor";
+                                } else if (interval.equals("8")) {
+                                    interval = "sexta-mayor";
+                                } else if (interval.equals("7")) {
+                                    interval = "septima-menor";
+                                } else {
+                                    interval = "septima-mayor";
+                                }
+
+                                while (asking) {
+
+                                    System.out.println("\nSeleccione si el intervalo es superior o inferior:");
+                                    System.out.println("1. superior");
+                                    System.out.println("2. inferior");
+                                    System.out.print("Intervalo: ");
+                                    String dir = input.nextLine();
+
+                                    if ("1 2".contains(dir)) {
+                                        String note = expertSystem.getInterval2Note(requestedNote, interval, dir);
+
+                                        if (dir.equals("1")) {
+                                            System.out.print("La nota a una " + interval + " superior de distancia de " + requestedNote + " es " + note + "\n");
+                                        } else {
+                                            System.out.print("La nota a una " + interval + " inferior de distancia de " + requestedNote + " es " + note + "\n");
+                                        }
+
+                                        asking = false;
+                                    } else if (dir.equals("3")) {
+                                        asking = false;
+                                    } else {
+                                        System.out.println("\nIntervalo incorrecto, por favor vuelva a seleccionarlo\n");
+                                    }
+                                }
+                            } else if (interval.equals("11")) {
+                                asking = false;
+                            } else {
+                                System.out.println("\nIntervalo no válido. Por favor ingreselo de nuevo\n");
+                            }
+                        }
+                    } else {
+                        System.out.println("Nota no válida, por favor ingrésela de nuevo.\n");
+                    }
+                }
+            } else if (option.equals("4")) {
+                boolean asking = true;
+
+                while (asking) {
                     System.out.println("Ingrese la nota para la cual desea obtener la escala mayor.");
                     System.out.print("Nota (S para salir)): ");
                     String note = input.nextLine();
@@ -118,7 +206,7 @@ public class App {
                         System.out.println("Nota no válida, por favor ingrésela de nuevo.\n");
                     }
                 }
-            } else if (option.equals("4")) {
+            } else if (option.equals("5")) {
                 boolean asking = true;
 
                 while (asking) {
@@ -144,14 +232,14 @@ public class App {
                         System.out.println("Nota no válida, por favor ingrésela de nuevo.\n");
                     }
                 }
-            } else if (option.equals("5")) {
+            } else if (option.equals("6")) {
                 System.out.println("\n***Gracias por usar el sistema. Lo esperamos pronto.***");
                 running = false;
             } else {
                 System.out.println("Opción no válida, por favor intente otra\n");
             }
 
-            System.out.print("<Enter> para continuar...");
+            System.out.print("<Enter> para continuar...\n");
             input.nextLine();
         }
 
