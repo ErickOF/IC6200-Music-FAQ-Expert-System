@@ -17,6 +17,7 @@
     (note A# 1)
     (note Bb 1)
     (note B 2)
+    (note Cb 2)
     (interval -11 segunda-menor)
     (interval -10 segunda-mayor)
     (interval -9 tercera-menor)
